@@ -9,7 +9,7 @@ robot controller App.
 
 The easiest way to create your own OpMode is to copy a Sample OpMode and make it your own.
 
-Sample OpModes exist in the FtcRobotController module.
+Sample opModes exist in the FtcRobotController module.
 To locate these samples, find the FtcRobotController module in the "Project/Android" tab.
 
 Expand the following tree elements:
