@@ -14,10 +14,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  *     ---
  *     BACK
  *
- *
  * flywheel: 4,5
- *
- *
  * */
 
 
