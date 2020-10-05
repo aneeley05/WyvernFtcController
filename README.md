@@ -1,4 +1,5 @@
-## NOTICE    https://img.shields.io/tokei/lines/github/badges/shields
+# WyvernFtcController  ![Discord](https://img.shields.io/discord/755574884851122256?style=flat&logo=discord&label=Discord&color=7289DA)
+## NOTICE    
 
 This repository contains the public FTC SDK for the Ultimate Goal (2020-2021) competition season.
 
