@@ -65,6 +65,31 @@ public class ControlInterpreter {
         // Controller mapping
         drive = -controller.left_stick_y;
         turn = controller.left_stick_x;
+
+        boolean flywheelUp10 = controller.dpad_up;
+        boolean flywheelDown10 = controller.dpad_down;
+        boolean flywheelUp50 = controller.dpad_right;
+        boolean flywheelDown50 = controller.dpad_left;
+
+        // DPAD speed changes
+        if (flywheelUp10) {
+            flywheelSpeed+=0.1;
+        } else if (flywheelDown10) {
+            flywheelSpeed-=0.1;
+        } else if (flywheelUp50) {
+            flywheelSpeed+=0.5;
+        } else if (flywheelDown50) {
+            flywheelSpeed-=0.5;
+        }
+
+        // Clipping max/min flywheel speed values
+        if(flywheelSpeed > 1) {
+            flywheelSpeed = 1;
+        }
+        if(flywheelSpeed < 0) {
+            flywheelSpeed = 0;
+        }
+
         return "Drive: " + drive + " Turn: " + turn + " Flywheel: " + flywheelSpeed;
     }
 }

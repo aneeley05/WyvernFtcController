@@ -25,7 +25,6 @@ public class TeleOpMode extends OpMode {
      */
     @Override
     public void init_loop() {
-
     }
 
     /*
@@ -42,7 +41,7 @@ public class TeleOpMode extends OpMode {
      */
     @Override
     public void loop() {
-        control.update(gamepad1);
+        //control.update(gamepad1);
 
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("ControllerData", control.controllerData(gamepad1));
