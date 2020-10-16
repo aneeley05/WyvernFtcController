@@ -10,6 +10,11 @@ public class ControlInterpreter {
     public double rPower = 0;
     public double flywheelSpeed = 0;
     public double max;
+    public boolean flywheelUp10pressed = false;
+    public boolean flywheelDown10pressed = false;
+    public boolean flywheelUp50pressed = false;
+    public boolean flywheelDown50pressed = false;
+
 
     DriveController dControl;
 
@@ -72,14 +77,28 @@ public class ControlInterpreter {
         boolean flywheelDown50 = controller.dpad_left;
 
         // DPAD speed changes
-        if (flywheelUp10) {
-            flywheelSpeed+=0.1;
-        } else if (flywheelDown10) {
-            flywheelSpeed-=0.1;
-        } else if (flywheelUp50) {
-            flywheelSpeed+=0.5;
-        } else if (flywheelDown50) {
-            flywheelSpeed-=0.5;
+        if (flywheelUp10 && !flywheelUp10pressed) {
+            flywheelSpeed += 0.1;
+            flywheelUp10pressed = true;
+        } if (flywheelDown10 && !flywheelDown10pressed) {
+            flywheelSpeed -= 0.1;
+            flywheelDown10pressed = true;
+        } if (flywheelUp50 && !flywheelUp50pressed) {
+            flywheelSpeed += 0.5;
+            flywheelUp50pressed = true;
+        } if (flywheelDown50 && !flywheelDown50pressed) {
+            flywheelSpeed -= 0.5;
+            flywheelDown50pressed = true;
+        }
+
+        if (!flywheelUp10) {
+            flywheelUp10pressed = false;
+        } if (!flywheelDown10) {
+            flywheelDown10pressed = false;
+        } if (!flywheelUp50) {
+            flywheelUp50pressed = false;
+        } if (!flywheelDown50) {
+            flywheelDown50pressed = false;
         }
 
         // Clipping max/min flywheel speed values
