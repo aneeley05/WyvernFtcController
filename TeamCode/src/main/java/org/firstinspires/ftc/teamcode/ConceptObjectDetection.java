@@ -68,7 +68,7 @@ public class ConceptObjectDetection extends LinearOpMode {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+            "AbEIUTT/////AAABmefEObgf5kOCsDDbz8T4tPt5cfmVWne/Dio9Xj9dBeog2fWfBTI/Th3bfB00aCoT7gd6YcnsRVSyqrDjQ4LUDc1PTo6UIqOY8dcG1LYIwPJ2pnar+ZedvtemhwCfONb3zocwMgry/jVFuR5CRP/BIjQQ9d68R5ecpci9Cyg0TZaIyl0jFmli+lmilwrsezCZKqRGHtJBxyTPnxr6fj0qV7Amcdbp4SRfsbG/D6UXoQOd7sKz+7iAAmPLnheCqRREbBFgTrK91b3z+8CPhW68rjdm3JTg9pmtXjGMD8rDM253betMLFaMk4OSeXOqtgQw5bJUCNORl1vw9ni+VJDGaybUf3v/cPb24eR0G6D1ikHQ";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
