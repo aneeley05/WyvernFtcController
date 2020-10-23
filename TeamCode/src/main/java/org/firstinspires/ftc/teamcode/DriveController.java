@@ -56,8 +56,8 @@ public class DriveController {
         motorBR.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //forward flywheel motors (unconfirmed)
-        motorFly1.setDirection(DcMotorSimple.Direction.FORWARD);
-        motorFly2.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorFly1.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorFly2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Set all power to 0 by default
         motorTL.setPower(0);

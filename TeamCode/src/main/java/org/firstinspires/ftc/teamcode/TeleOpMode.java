@@ -44,7 +44,7 @@ public class TeleOpMode extends OpMode {
         //control.update(gamepad1);
 
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("ControllerData", control.controllerData(gamepad1));
+        telemetry.addData("ControllerData", control.update(gamepad1));
     }
 
     /*
