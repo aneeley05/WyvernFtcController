@@ -9,7 +9,6 @@ public class ControlInterpreter {
     public double lPower = 0;
     public double rPower = 0;
     public double flywheelSpeed = 0;
-    public double max;
     public boolean flywheelUp10pressed = false;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp50pressed = false;

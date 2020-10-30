@@ -9,6 +9,7 @@ public class TeleOpMode extends OpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
     ControlInterpreter control = new ControlInterpreter();
+    DriveController dControl = new DriveController(hardwareMap);
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -42,9 +43,15 @@ public class TeleOpMode extends OpMode {
     @Override
     public void loop() {
         //control.update(gamepad1);
-
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("ControllerData", control.update(gamepad1));
+        try {
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("ControllerData", control.update(gamepad1));
+        }
+        catch(Exception e) {
+            dControl.setFlywheelPower(0);
+            dControl.setDrivePower(0,0);
+            telemetry.addData("FATAL ERROR", "FATAL RUNTIME ERROR");
+        }
     }
 
     /*

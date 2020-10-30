@@ -55,7 +55,7 @@ public class DriveController {
         motorTR.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBR.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        //forward flywheel motors (unconfirmed)
+        //reverse flywheel motors (confirmed)
         motorFly1.setDirection(DcMotorSimple.Direction.REVERSE);
         motorFly2.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -93,5 +93,13 @@ public class DriveController {
     public void setFlywheelPower(double flypower){
         motorFly1.setPower(flypower);
         motorFly2.setPower(flypower);
+    }
+
+    public void driveForDistance(double speed, double leftdistance, double rightdistance) {
+
+    }
+
+    public void driveForTime(double speed, double lefttime, double rightime) {
+
     }
 }
