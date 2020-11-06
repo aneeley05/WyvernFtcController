@@ -19,12 +19,13 @@ public class ControlInterpreter {
 
     public void init(HardwareMap hwMap) {
         // Create an instance of, and initialize the drive controller
+        // Dragons were here; buggy code.
         dControl = new DriveController(hwMap);
         dControl.init();
     }
 
     public String update(Gamepad controller) {
-// Controller mapping
+        // Controller mapping
         drive = -controller.left_stick_y;
         turn = controller.left_stick_x;
 
