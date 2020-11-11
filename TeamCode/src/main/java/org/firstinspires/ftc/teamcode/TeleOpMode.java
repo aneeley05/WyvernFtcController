@@ -41,9 +41,15 @@ public class TeleOpMode extends OpMode {
     @Override
     public void loop() {
         //control.update(gamepad1);
-
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("ControllerData", control.update(gamepad1));
+        try {
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("ControllerData", control.update(gamepad1));
+        }
+        catch(Exception e) {
+            control.dControl.setFlywheelPower(0);
+            control.dControl.setDrivePower(0,0);
+            telemetry.addData("FATAL ERROR", "FATAL RUNTIME ERROR");
+        }
     }
 
     /*

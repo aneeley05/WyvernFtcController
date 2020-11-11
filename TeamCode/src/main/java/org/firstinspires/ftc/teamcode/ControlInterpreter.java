@@ -16,16 +16,16 @@ public class ControlInterpreter {
     public boolean flywheelDown50pressed = false;
 
 
-    RobotBoi robotBoi;
+    DriveController dControl;
 
     public void init(HardwareMap hwMap) {
         // Create an instance of, and initialize the drive controller
-        robotBoi = new RobotBoi(hwMap);
-        robotBoi.init();
+        dControl = new DriveController(hwMap);
+        dControl.init();
     }
 
     public String update(Gamepad controller) {
-        // Controller mapping
+// Controller mapping
         drive = -controller.left_stick_y;
         turn = controller.left_stick_x;
 
@@ -67,7 +67,7 @@ public class ControlInterpreter {
             flywheelSpeed = 0;
         }
 
-        robotBoi.setFlywheelPower(flywheelSpeed);
+        dControl.setFlywheelPower(flywheelSpeed);
         return "FLYWHEEL: " + flywheelSpeed;
     }
 }
