@@ -46,8 +46,8 @@ public class TeleOpMode extends OpMode {
             telemetry.addData("ControllerData", control.update(gamepad1));
         }
         catch(Exception e) {
-            control.dControl.setFlywheelPower(0);
-            control.dControl.setDrivePower(0,0);
+            control.robotBoi.setFlywheelPower(0);
+            control.robotBoi.setDrivePower(0,0);
             telemetry.addData("FATAL ERROR", "FATAL RUNTIME ERROR");
         }
     }
