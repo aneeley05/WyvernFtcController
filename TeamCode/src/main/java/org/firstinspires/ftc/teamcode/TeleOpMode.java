@@ -55,8 +55,8 @@ public class TeleOpMode extends OpMode {
 
     /*
      * Code to run ONCE after the driver hits STOP
-     */
-    @Override
-    public void stop() {
+
+
     }
 }
+
