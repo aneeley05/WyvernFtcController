@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Default_TeleOpMode", group = "OpModes")
+@TeleOp(name = "Default Driver Control", group = "OpModes")
 public class DriverControlMode extends OpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
