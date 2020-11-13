@@ -9,23 +9,23 @@ public class ControlInterpreter {
     public double lPower = 0;
     public double rPower = 0;
     public double flywheelSpeed = 0;
+    public double max;
     public boolean flywheelUp10pressed = false;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp50pressed = false;
     public boolean flywheelDown50pressed = false;
 
 
-    DriveController dControl;
+    Vermithrax vermithrax;
 
     public void init(HardwareMap hwMap) {
         // Create an instance of, and initialize the drive controller
-        // Dragons were here; buggy code.
-        dControl = new DriveController(hwMap);
-        dControl.init();
+        vermithrax = new Vermithrax(hwMap);
+        vermithrax.init();
     }
 
     public String update(Gamepad controller) {
-        // Controller mapping
+// Controller mapping
         drive = -controller.left_stick_y;
         turn = controller.left_stick_x;
 
@@ -67,7 +67,7 @@ public class ControlInterpreter {
             flywheelSpeed = 0;
         }
 
-        dControl.setFlywheelPower(flywheelSpeed);
+        vermithrax.setFlywheelPower(flywheelSpeed);
         return "FLYWHEEL: " + flywheelSpeed;
     }
 }
