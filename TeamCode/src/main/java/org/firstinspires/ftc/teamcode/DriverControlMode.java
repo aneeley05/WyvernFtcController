@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name = "Default_TeleOpMode", group = "OpModes")
 public class DriverControlMode extends OpMode {
 
-    private final ElapsedTime runtime = new ElapsedTime();
-    ControlInterpreter control = new ControlInterpreter();
-    Vermithrax vermi = control.vermithrax;
+    public ElapsedTime runtime;
+    public ControlInterpreter control;
+    public Vermithrax vermi;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -18,6 +18,9 @@ public class DriverControlMode extends OpMode {
     public void init() {
         telemetry.addData("Status", "Initialized");
         control.init(hardwareMap);
+        runtime = new ElapsedTime();
+        control = new ControlInterpreter();
+        vermi = control.vermithrax;
     }
 
     //region InitLoop
