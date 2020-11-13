@@ -16,12 +16,12 @@ public class ControlInterpreter {
     public boolean flywheelDown50pressed = false;
 
 
-    RobotBoi robotBoi;
+    Vermithrax vermithrax;
 
     public void init(HardwareMap hwMap) {
         // Create an instance of, and initialize the drive controller
-        robotBoi = new RobotBoi(hwMap);
-        robotBoi.init();
+        vermithrax = new Vermithrax(hwMap);
+        vermithrax.init();
     }
 
     public String update(Gamepad controller) {
@@ -67,7 +67,7 @@ public class ControlInterpreter {
             flywheelSpeed = 0;
         }
 
-        robotBoi.setFlywheelPower(flywheelSpeed);
+        vermithrax.setFlywheelPower(flywheelSpeed);
         return "FLYWHEEL: " + flywheelSpeed;
     }
 }

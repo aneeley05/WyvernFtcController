@@ -18,7 +18,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * */
 
 
-public class RobotBoi {
+public class Vermithrax {
     HardwareMap hwMap;
     public DcMotor motorFL;
     public DcMotor motorBL;
@@ -30,7 +30,7 @@ public class RobotBoi {
 
 
 
-    public RobotBoi(HardwareMap hardwareMap) {
+    public Vermithrax(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
     }
 
