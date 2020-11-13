@@ -27,7 +27,7 @@ public class DriverControlMode extends OpMode {
     //endregion
 
     /*
-     * Code to run ONCE when the driver hits PLAY
+     * Code to run ONCE when the driver hits PLA
      */
     @Override
     public void start() {
