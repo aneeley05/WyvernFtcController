@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -34,6 +34,10 @@ public class ControlInterpreter {
         boolean flywheelDown50 = controller.dpad_left;
 
         // DPAD speed changes
+
+
+
+
         if (flywheelUp10 && !flywheelUp10pressed) {
             flywheelSpeed += 0.1;
             flywheelUp10pressed = true;
