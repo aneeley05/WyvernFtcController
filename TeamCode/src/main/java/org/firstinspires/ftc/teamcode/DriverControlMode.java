@@ -4,11 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Default_OpMode", group = "OpModes")
-public class TeleOpMode extends OpMode {
+@TeleOp(name = "Default_TeleOpMode", group = "OpModes")
+public class DriverControlMode extends OpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
     ControlInterpreter control = new ControlInterpreter();
+    Vermithrax vermithrax = control.vermithrax;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -19,13 +20,11 @@ public class TeleOpMode extends OpMode {
         control.init(hardwareMap);
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-     * note: we probably won't need this
-     */
+    //region InitLoop
     @Override
     public void init_loop() {
     }
+    //endregion
 
     /*
      * Code to run ONCE when the driver hits PLAY
@@ -47,8 +46,8 @@ public class TeleOpMode extends OpMode {
             telemetry.addData("ControllerData", control.update(gamepad1));
         }
         catch(Exception e) {
-            control.dControl.setFlywheelPower(0);
-            control.dControl.setDrivePower(0,0);
+            control.vermithrax.setFlywheelPower(0);
+            control.vermithrax.setDrivePower(0,0);
             telemetry.addData("FATAL ERROR", "FATAL RUNTIME ERROR");
         }
     }
@@ -58,5 +57,7 @@ public class TeleOpMode extends OpMode {
      */
     @Override
     public void stop() {
+        vermithrax.setDrivePower(0,0);
+        vermithrax.setFlywheelPower(0);
     }
 }
