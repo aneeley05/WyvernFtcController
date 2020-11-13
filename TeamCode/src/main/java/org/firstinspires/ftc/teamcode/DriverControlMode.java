@@ -9,7 +9,7 @@ public class DriverControlMode extends OpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
     ControlInterpreter control = new ControlInterpreter();
-    Vermithrax vermithrax = control.vermithrax;
+    Vermithrax vermi = control.vermithrax;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -46,8 +46,8 @@ public class DriverControlMode extends OpMode {
             telemetry.addData("ControllerData", control.update(gamepad1));
         }
         catch(Exception e) {
-            control.vermithrax.setFlywheelPower(0);
-            control.vermithrax.setDrivePower(0,0);
+            vermi.setFlywheelPower(0);
+            vermi.setDrivePower(0,0);
             telemetry.addData("FATAL ERROR", "FATAL RUNTIME ERROR");
         }
     }
@@ -57,7 +57,7 @@ public class DriverControlMode extends OpMode {
      */
     @Override
     public void stop() {
-        vermithrax.setDrivePower(0,0);
-        vermithrax.setFlywheelPower(0);
+        vermi.setDrivePower(0,0);
+        vermi.setFlywheelPower(0);
     }
 }
