@@ -15,7 +15,6 @@ public class ControlInterpreter {
     public boolean flywheelUp50pressed = false;
     public boolean flywheelDown50pressed = false;
 
-
     Vermithrax vermithrax;
 
     public void init(HardwareMap hwMap) {
