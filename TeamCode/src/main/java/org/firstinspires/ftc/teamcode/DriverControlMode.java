@@ -15,10 +15,10 @@ public class DriverControlMode extends OpMode {
      */
     @Override
     public void init() {
-        telemetry.addData("Status", "Initialized");
-        control.init(hardwareMap);
         runtime = new ElapsedTime();
         control = new ControlInterpreter();
+        control.init(hardwareMap);
+        telemetry.addData("Status", "Initialized");
     }
 
     //region InitLoop
@@ -54,7 +54,7 @@ public class DriverControlMode extends OpMode {
     }
 
     /*
-     * Code to run ONCE after the driver hits STOP
+     * Code to run ONCE after the driver hits STOPd
      */
     @Override
     public void stop() {
