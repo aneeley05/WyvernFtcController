@@ -10,8 +10,8 @@ public class ControlInterpreter {
     public double rPower = 0;
     public double flywheelSpeed = 0;
     public double max;
-    public boolean flywheelUp10pressed = false;
     public boolean flywheelDown10pressed = false;
+    public boolean flywheelUp10pressed = false;
     public boolean flywheelUp50pressed = false;
     public boolean flywheelDown50pressed = false;
 
@@ -34,9 +34,6 @@ public class ControlInterpreter {
         boolean flywheelDown50 = controller.dpad_left;
 
         // DPAD speed changes
-
-
-
 
         if (flywheelUp10 && !flywheelUp10pressed) {
             flywheelSpeed += 0.1;
@@ -62,6 +59,7 @@ public class ControlInterpreter {
             flywheelDown50pressed = false;
         }
 
+
         // Clipping max/min flywheel speed values
         if(flywheelSpeed > 1) {
             flywheelSpeed = 1;
@@ -71,6 +69,6 @@ public class ControlInterpreter {
         }
 
         vermithrax.setFlywheelPower(flywheelSpeed);
-        return "FLYWHEEL: " + flywheelSpeed;
+        return "FLYWHEEL: " + flywheelSpeed + "%";  // FLYWHEEL: 15%
     }
 }

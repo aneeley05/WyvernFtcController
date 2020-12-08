@@ -98,8 +98,6 @@ public class Vermithrax {
     public void driveForDistance(double speed, double leftdistance, double rightdistance) {
 
     }
-
-    public void driveForTime(double speed, double lefttime, double rightime) {
-
-    }
 }
+
+

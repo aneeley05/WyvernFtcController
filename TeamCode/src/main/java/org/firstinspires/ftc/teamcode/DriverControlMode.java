@@ -28,7 +28,7 @@ public class DriverControlMode extends OpMode {
     //endregion
 
     /*
-     * Code to run ONCE when the driver hits PLA
+     * Code to run ONCE when the driver hits PLAY
      */
     @Override
     public void start() {
@@ -43,12 +43,12 @@ public class DriverControlMode extends OpMode {
     public void loop() {
         //control.update(gamepad1);
         try {
+            String controllerData = control.update(gamepad1); // Might error
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("ControllerData", control.update(gamepad1));
-        }
-        catch(Exception e) {
+            telemetry.addData("ControllerData", controllerData);
+        } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
-            control.vermithrax.setDrivePower(0,0);
+            control.vermithrax.setDrivePower(0, 0);
             telemetry.addData("FATAL ERROR", "FATAL RUNTIME ERROR");
         }
     }
@@ -58,7 +58,7 @@ public class DriverControlMode extends OpMode {
      */
     @Override
     public void stop() {
-        control.vermithrax.setDrivePower(0,0);
+        control.vermithrax.setDrivePower(0, 0);
         control.vermithrax.setFlywheelPower(0);
     }
 }
