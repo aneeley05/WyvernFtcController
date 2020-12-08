@@ -69,6 +69,6 @@ public class ControlInterpreter {
         }
 
         vermithrax.setFlywheelPower(flywheelSpeed);
-        return "FLYWHEEL: " + flywheelSpeed + "%";  // FLYWHEEL: 15%
+        return "FLYWHEEL: " + flywheelSpeed;  // FLYWHEEL: 15%
     }
 }

@@ -56,8 +56,8 @@ public class Vermithrax {
         motorBR.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //reverse flywheel motors (confirmed)
-        motorFly1.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorFly2.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorFly1.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorFly2.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Set all power to 0 by default
         motorFL.setPower(0);
