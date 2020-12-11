@@ -36,16 +36,16 @@ public class Vermithrax {
 
     public void init() {
         // Left motors
-        motorFL = hwMap.get(DcMotor.class, "motor0");
-        motorBL = hwMap.get(DcMotor.class, "motor1");
+        motorFL = hwMap.get(DcMotor.class, "motorFL");
+        motorBL = hwMap.get(DcMotor.class, "motorBL");
 
         // Right Motors
-        motorFR = hwMap.get(DcMotor.class, "motor2");
-        motorBR = hwMap.get(DcMotor.class, "motor3");
+        motorFR = hwMap.get(DcMotor.class, "motorFR");
+        motorBR = hwMap.get(DcMotor.class, "motorBR");
 
         // Flywheel motors
-        motorFly1 = hwMap.get(DcMotor.class, "motor4");
-        motorFly2 = hwMap.get(DcMotor.class, "motor5");
+        motorFly1 = hwMap.get(DcMotor.class, "motorFly1");
+        motorFly2 = hwMap.get(DcMotor.class, "motorFly2");
 
         // Forward left motors (unconfirmed)
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
