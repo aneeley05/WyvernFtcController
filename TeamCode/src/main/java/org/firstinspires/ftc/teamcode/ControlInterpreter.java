@@ -25,8 +25,8 @@ public class ControlInterpreter {
 
     public String update(Gamepad controller) {
 // Controller mapping
-        drive = -controller.left_stick_y;
-        turn = controller.left_stick_x;
+        lPower = -controller.left_stick_y;
+        rPower = -controller.right_stick_y;
 
         boolean flywheelUp10 = controller.dpad_up;
         boolean flywheelDown10 = controller.dpad_down;
@@ -69,6 +69,7 @@ public class ControlInterpreter {
         }
 
         vermithrax.setFlywheelPower(flywheelSpeed);
-        return "FLYWHEEL: " + flywheelSpeed;  // FLYWHEEL: 15%
+        vermithrax.setDrivePower(lPower, rPower);
+        return "FLYWHEEL: " + flywheelSpeed + " lDrive: " + lPower + " rDrive: " + rPower;
     }
 }
