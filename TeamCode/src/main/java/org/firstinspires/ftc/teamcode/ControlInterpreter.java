@@ -4,8 +4,6 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ControlInterpreter {
-    public double drive;
-    public double turn;
     public double lPower = 0;
     public double rPower = 0;
     public double flywheelSpeed = 0;
@@ -23,7 +21,7 @@ public class ControlInterpreter {
         vermithrax.init();
     }
 
-    public String update(Gamepad controller) {
+    public void update(Gamepad controller) {
 // Controller mapping
         lPower = -controller.left_stick_y;
         rPower = -controller.right_stick_y;
@@ -49,27 +47,20 @@ public class ControlInterpreter {
             flywheelDown50pressed = true;
         }
 
-        if (!flywheelUp10) {
-            flywheelUp10pressed = false;
-        } if (!flywheelDown10) {
-            flywheelDown10pressed = false;
-        } if (!flywheelUp50) {
-            flywheelUp50pressed = false;
-        } if (!flywheelDown50) {
-            flywheelDown50pressed = false;
-        }
-
+        if (!flywheelUp10) flywheelUp10pressed = false;
+        if (!flywheelDown10) flywheelDown10pressed = false;
+        if (!flywheelUp50) flywheelUp50pressed = false;
+        if (!flywheelDown50) flywheelDown50pressed = false;
 
         // Clipping max/min flywheel speed values
-        if(flywheelSpeed > 1) {
-            flywheelSpeed = 1;
-        }
-        if(flywheelSpeed < 0) {
-            flywheelSpeed = 0;
-        }
+        if(flywheelSpeed > 1) flywheelSpeed = 1;
+        if(flywheelSpeed < 0) flywheelSpeed = 0;
 
         vermithrax.setFlywheelPower(flywheelSpeed);
         vermithrax.setDrivePower(lPower, rPower);
+    }
+
+    public String getTelemetryStats() {
         return "FLYWHEEL: " + flywheelSpeed + " lDrive: " + lPower + " rDrive: " + rPower;
     }
 }

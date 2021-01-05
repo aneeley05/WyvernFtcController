@@ -41,15 +41,15 @@ public class DriverControlMode extends OpMode {
      */
     @Override
     public void loop() {
-        //control.update(gamepad1);
         try {
-            String controllerData = control.update(gamepad1); // Might error
+            control.update(gamepad1); // Might error
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("ControllerData", controllerData);
+            telemetry.addData("ControllerData", control.getTelemetryStats());
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);
-            telemetry.addData("FATAL ERROR", "FATAL RUNTIME ERROR");
+            telemetry.addData("ControllerData", "FATAL RUNTIME ERROR");
+            telemetry.addData("ERROR", e.getStackTrace());
         }
     }
 
