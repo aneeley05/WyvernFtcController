@@ -4,20 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-/*
- *
- * This code is written assuming the following motor configuration (by index):
- *
- *     FRONT
- *     0---2
- *     1---3
- *     ---
- *     BACK
- *
- * flywheel: 4,5
- * */
-
-
 public class Vermithrax {
     HardwareMap hwMap;
     public DcMotor motorFL;
@@ -27,8 +13,6 @@ public class Vermithrax {
 
     public DcMotor motorFly1;
     public DcMotor motorFly2;
-
-
 
     public Vermithrax(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
@@ -67,7 +51,6 @@ public class Vermithrax {
         motorFly1.setPower(0);
         motorFly2.setPower(0);
 
-
         // Set encoder mode
         motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -75,8 +58,6 @@ public class Vermithrax {
         motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorFly1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorFly2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
     }
 
     // A simple drive function to set the power of both motor arrays at the same time
@@ -93,6 +74,10 @@ public class Vermithrax {
     public void setFlywheelPower(double flypower){
         motorFly1.setPower(flypower);
         motorFly2.setPower(flypower);
+    }
+
+    public void setIntakeState(boolean state) {
+
     }
 
     public void driveForDistance(double speed, double leftdistance, double rightdistance) {

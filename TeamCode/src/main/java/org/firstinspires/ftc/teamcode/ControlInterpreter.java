@@ -1,4 +1,4 @@
- package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -22,7 +22,7 @@ public class ControlInterpreter {
     }
 
     public void update(Gamepad controller) {
-// Controller mapping
+        // Controller mapping
         lPower = -controller.left_stick_y;
         rPower = -controller.right_stick_y;
 
@@ -30,6 +30,8 @@ public class ControlInterpreter {
         boolean flywheelDown10 = controller.dpad_down;
         boolean flywheelUp50 = controller.dpad_right;
         boolean flywheelDown50 = controller.dpad_left;
+
+        boolean intakeToggle = controller.right_trigger > 0.3;
 
         // DPAD speed changes
 
@@ -47,6 +49,7 @@ public class ControlInterpreter {
             flywheelDown50pressed = true;
         }
 
+        // Reset dpad values
         if (!flywheelUp10) flywheelUp10pressed = false;
         if (!flywheelDown10) flywheelDown10pressed = false;
         if (!flywheelUp50) flywheelUp50pressed = false;
@@ -56,8 +59,10 @@ public class ControlInterpreter {
         if(flywheelSpeed > 1) flywheelSpeed = 1;
         if(flywheelSpeed < 0) flywheelSpeed = 0;
 
+        // Set hardware state
         vermithrax.setFlywheelPower(flywheelSpeed);
         vermithrax.setDrivePower(lPower, rPower);
+        vermithrax.setIntakeState(intakeToggle);
     }
 
     public String getTelemetryStats() {
