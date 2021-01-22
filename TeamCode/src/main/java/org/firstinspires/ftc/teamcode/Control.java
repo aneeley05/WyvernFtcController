@@ -3,10 +3,17 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class ControlInterpreter {
+/*
+    CONTROL LAYER
+
+    Contains all controlling functions for the robot, just above the hardware layer
+*/
+
+public class Control {
     public double lPower = 0;
     public double rPower = 0;
     public double flywheelSpeed = 0;
+    public boolean intakeToggle;
     public double max;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp10pressed = false;
@@ -21,7 +28,7 @@ public class ControlInterpreter {
         vermithrax.init();
     }
 
-    public void update(Gamepad controller) {
+    public void updateGamepad(Gamepad controller) {
         // Controller mapping
         lPower = -controller.left_stick_y;
         rPower = -controller.right_stick_y;
@@ -31,7 +38,7 @@ public class ControlInterpreter {
         boolean flywheelUp50 = controller.dpad_right;
         boolean flywheelDown50 = controller.dpad_left;
 
-        boolean intakeToggle = controller.right_trigger > 0.3;
+        intakeToggle = controller.right_trigger > 0.3;
 
         // DPAD speed changes
 
@@ -59,6 +66,12 @@ public class ControlInterpreter {
         if(flywheelSpeed > 1) flywheelSpeed = 1;
         if(flywheelSpeed < 0) flywheelSpeed = 0;
 
+        // Clipping stick values
+        if(lPower > 1) lPower = 1;
+        if(lPower < 0) lPower = 0;
+        if(rPower > 1) rPower = 1;
+        if(rPower < 0) rPower = 0;
+
         // Set hardware state
         vermithrax.setFlywheelPower(flywheelSpeed);
         vermithrax.setDrivePower(lPower, rPower);
@@ -66,6 +79,6 @@ public class ControlInterpreter {
     }
 
     public String getTelemetryStats() {
-        return "FLYWHEEL: " + flywheelSpeed + " lDrive: " + lPower + " rDrive: " + rPower;
+        return "FLYWHEEL: " + flywheelSpeed + " lDRIVE: " + lPower + " rDRIVE: " + rPower + " INTAKE: " + intakeToggle;
     }
 }
