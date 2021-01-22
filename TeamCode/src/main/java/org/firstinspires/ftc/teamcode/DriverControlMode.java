@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Default_TeleOpMode", group = "OpModes")
+@TeleOp(name = "Vermithrax_TeleOpMode", group = "OpModes")
 public class DriverControlMode extends OpMode {
 
     public ElapsedTime runtime;
@@ -54,7 +54,7 @@ public class DriverControlMode extends OpMode {
     }
 
     /*
-     * Code to run ONCE after the driver hits STOPd
+     * Code to run ONCE after the driver hits STOP
      */
     @Override
     public void stop() {
