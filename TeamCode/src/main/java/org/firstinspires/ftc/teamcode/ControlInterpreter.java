@@ -62,10 +62,12 @@ public class ControlInterpreter {
         // Set hardware state
         vermithrax.setFlywheelPower(flywheelSpeed);
         vermithrax.setDrivePower(lPower, rPower);
-        vermithrax.setIntakeState(intakeToggle);
+//        vermithrax.setIntakeState(intakeToggle);
     }
 
     public String getTelemetryStats() {
         return "FLYWHEEL: " + flywheelSpeed + " lDrive: " + lPower + " rDrive: " + rPower;
     }
 }
+
+
