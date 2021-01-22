@@ -14,7 +14,6 @@ public class Control {
     public double rPower = 0;
     public double flywheelSpeed = 0;
     public boolean intakeToggle;
-    public double max;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp10pressed = false;
     public boolean flywheelUp50pressed = false;
