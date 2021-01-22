@@ -13,7 +13,7 @@ public class Control {
     public double lPower = 0;
     public double rPower = 0;
     public double flywheelSpeed = 0;
-    public boolean intakeToggle;
+    public boolean intakeStatus;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp10pressed = false;
     public boolean flywheelUp50pressed = false;
@@ -37,7 +37,7 @@ public class Control {
         boolean flywheelUp50 = controller.dpad_right;
         boolean flywheelDown50 = controller.dpad_left;
 
-        intakeToggle = controller.right_trigger > 0.3;
+        intakeStatus = controller.right_trigger > 0.3;
 
         // DPAD speed changes
 
@@ -72,12 +72,13 @@ public class Control {
         if(rPower < 0) rPower = 0;
 
         // Set hardware state
-        vermithrax.setFlywheelPower(flywheelSpeed);
+        if(controller.left_trigger > 0.3) vermithrax.setFlywheelPower(flywheelSpeed);
+        else vermithrax.setFlywheelPower(0);
         vermithrax.setDrivePower(lPower, rPower);
-        //vermithrax.setIntakeState(intakeToggle);
+        vermithrax.setIntakeState(intakeStatus);
     }
 
     public String getTelemetryStats() {
-        return "FLYWHEEL: " + flywheelSpeed + " lDRIVE: " + lPower + " rDRIVE: " + rPower + " INTAKE: " + intakeToggle;
+        return "FLYWHEEL: " + flywheelSpeed + " lDRIVE: " + lPower + " rDRIVE: " + rPower + " INTAKE: " + intakeStatus;
     }
 }

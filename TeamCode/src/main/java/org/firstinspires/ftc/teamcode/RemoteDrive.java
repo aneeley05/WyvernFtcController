@@ -28,12 +28,6 @@ public class RemoteDrive extends OpMode {
         telemetry.addData("Status", "Initialized");
     }
 
-    //region InitLoop
-    @Override
-    public void init_loop() {
-    }
-    //endregion
-
     /*
      * Code to run ONCE when the driver hits PLAY
      */

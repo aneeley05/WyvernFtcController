@@ -21,6 +21,8 @@ public class Vermithrax {
     public DcMotor motorFly1;
     public DcMotor motorFly2;
 
+    public DcMotor motorIntake;
+
     public Vermithrax(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
     }
@@ -38,17 +40,23 @@ public class Vermithrax {
         motorFly1 = hwMap.get(DcMotor.class, "motorFly1");
         motorFly2 = hwMap.get(DcMotor.class, "motorFly2");
 
-        // Forward left motors (confirmed)
+        // Intake motors
+        motorIntake = hwMap.get(DcMotor.class, "motorIntake");
+
+        //  left motors (confirmed)
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        // Reverse right motors (confirmed)
+        //  right motors (confirmed)
         motorFR.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBR.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        //reverse flywheel motors (confirmed)
+        // flywheel motors (confirmed)
         motorFly1.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFly2.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        // Intake motors (uncomfirmed)
+        motorIntake.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Set all power to 0 by default
         motorFL.setPower(0);
@@ -57,6 +65,7 @@ public class Vermithrax {
         motorBR.setPower(0);
         motorFly1.setPower(0);
         motorFly2.setPower(0);
+        motorIntake.setPower(0);
 
         // Set encoder mode
         motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -65,6 +74,7 @@ public class Vermithrax {
         motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorFly1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorFly2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     // A simple drive function to set the power of both motor arrays at the same time
@@ -84,7 +94,8 @@ public class Vermithrax {
     }
 
     public void setIntakeState(boolean state) {
-
+        if(state) motorIntake.setPower(1);
+        else motorIntake.setPower(0);
     }
 }
 
