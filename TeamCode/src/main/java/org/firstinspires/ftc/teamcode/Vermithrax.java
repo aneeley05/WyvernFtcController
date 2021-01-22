@@ -4,6 +4,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+/*
+    HARDWARE LAYER
+
+    Does not do any logical operations. Base layer for direct communication with hardware.
+    Only directly initializes and communicates with sensors and motors.
+*/
+
 public class Vermithrax {
     HardwareMap hwMap;
     public DcMotor motorFL;
@@ -31,11 +38,11 @@ public class Vermithrax {
         motorFly1 = hwMap.get(DcMotor.class, "motorFly1");
         motorFly2 = hwMap.get(DcMotor.class, "motorFly2");
 
-        // Forward left motors (unconfirmed)
+        // Forward left motors (confirmed)
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        // Reverse right motors (unconfirmed)
+        // Reverse right motors (confirmed)
         motorFR.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBR.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -77,10 +84,6 @@ public class Vermithrax {
     }
 
     public void setIntakeState(boolean state) {
-
-    }
-
-    public void driveForDistance(double speed, double leftdistance, double rightdistance) {
 
     }
 }

@@ -4,11 +4,18 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Default_TeleOpMode", group = "OpModes")
-public class DriverControlMode extends OpMode {
+/*
+    DRIVE LAYER
+
+    Contains all logical game operations and utilizes the control layer for robot functions
+*/
+
+
+@TeleOp(name = "Vermithrax_RemoteDrive", group = "OpModes")
+public class RemoteDrive extends OpMode {
 
     public ElapsedTime runtime;
-    public ControlInterpreter control;
+    public Control control;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -16,7 +23,7 @@ public class DriverControlMode extends OpMode {
     @Override
     public void init() {
         runtime = new ElapsedTime();
-        control = new ControlInterpreter();
+        control = new Control();
         control.init(hardwareMap);
         telemetry.addData("Status", "Initialized");
     }
@@ -42,7 +49,7 @@ public class DriverControlMode extends OpMode {
     @Override
     public void loop() {
         try {
-            control.update(gamepad1); // Might error
+            control.updateGamepad(gamepad1);
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("ControllerData", control.getTelemetryStats());
         } catch (Exception e) {
@@ -54,7 +61,7 @@ public class DriverControlMode extends OpMode {
     }
 
     /*
-     * Code to run ONCE after the driver hits STOPd
+     * Code to run ONCE after the driver hits STOP
      */
     @Override
     public void stop() {
