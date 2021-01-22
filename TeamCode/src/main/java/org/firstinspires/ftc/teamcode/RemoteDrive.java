@@ -14,7 +14,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name = "Vermithrax_RemoteDrive", group = "OpModes")
 public class RemoteDrive extends OpMode {
 
-    public ElapsedTime runtime;
     public Control control;
 
     /*
@@ -22,7 +21,6 @@ public class RemoteDrive extends OpMode {
      */
     @Override
     public void init() {
-        runtime = new ElapsedTime();
         control = new Control();
         control.init(hardwareMap);
         telemetry.addData("Status", "Initialized");
@@ -33,7 +31,6 @@ public class RemoteDrive extends OpMode {
      */
     @Override
     public void start() {
-        runtime.reset();
         telemetry.addData("Status", "Starting...");
     }
 
@@ -44,11 +41,12 @@ public class RemoteDrive extends OpMode {
     public void loop() {
         try {
             control.updateGamepad(gamepad1);
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Status", "RUNNING");
             telemetry.addData("ControllerData", control.getTelemetryStats());
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);
+            control.vermithrax.setIntakeState(false);
             telemetry.addData("ControllerData", "FATAL RUNTIME ERROR");
             telemetry.addData("ERROR", e.getStackTrace());
         }
