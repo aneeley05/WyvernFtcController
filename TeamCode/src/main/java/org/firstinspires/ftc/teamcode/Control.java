@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Control {
     public double lPower = 0;
     public double rPower = 0;
-    public double flywheelSpeed = 0;
+    public double flywheelSpeed = 1;
     public boolean intakeStatus;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp10pressed = false;
