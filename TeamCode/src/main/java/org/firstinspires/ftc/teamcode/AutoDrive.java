@@ -24,7 +24,7 @@ public class AutoDrive extends OpMode {
     @Override
     public void loop() {
         try {
-            control.driveForTime(0.5, 1);
+            control.driveForTime(0.5,0.5, 1000);
             requestOpModeStop();
             telemetry.addData("Status", "RUNNING");
             telemetry.addData("ControllerData", control.getTelemetryStats());

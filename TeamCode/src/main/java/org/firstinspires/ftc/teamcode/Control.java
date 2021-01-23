@@ -81,4 +81,10 @@ public class Control {
     public String getTelemetryStats() {
         return "FLYWHEEL: " + flywheelSpeed + " lDRIVE: " + lPower + " rDRIVE: " + rPower + " INTAKE: " + intakeStatus;
     }
+
+    public void driveForTime(double lPower, double rPower, long time) throws InterruptedException{
+        vermithrax.setDrivePower(lPower, rPower);
+        Thread.sleep(time);
+        vermithrax.setDrivePower(0, 0);
+    }
 }
