@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
     DRIVE LAYER
 
     Contains all logical game operations and utilizes the control layer for robot functions
+
+    NOTE: Driver is controller 1, ring master is controller 2
 */
 
 
