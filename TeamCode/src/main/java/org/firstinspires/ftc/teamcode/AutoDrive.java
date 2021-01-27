@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 /*
     DRIVE LAYER
@@ -28,7 +27,8 @@ public class AutoDrive extends LinearOpMode {
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);
-            control.vermithrax.setIntakeState(false);
+            control.vermithrax.setIntakePower(0);
+            control.vermithrax.setLoaderPower(0);
             telemetry.addData("Status", "FATAL RUNTIME ERROR");
             telemetry.addData("ERROR", e.getStackTrace());
         }

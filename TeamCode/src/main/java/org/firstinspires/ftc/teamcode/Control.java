@@ -48,9 +48,10 @@ public class Control {
         boolean driveUp50 = controller1.dpad_right;
         boolean driveDown50 = controller1.dpad_left;
 
-        intakeStatus = controller2.right_trigger > 0.3;
-        loaderStatus = controller2.right_bumper;
-        flywheelStatus = controller2.left_trigger > 0.3;
+        intakeStatus = controller2.left_trigger > 0.3;
+        loaderStatus = controller2.right_trigger > 0.3;
+        flywheelStatus = controller2.left_bumper;
+        boolean emergencyUnload = controller2.x;
 
         // DPAD speed changes
 
@@ -104,11 +105,19 @@ public class Control {
         if(rPower < -1) rPower = -1;
 
         // Set hardware state
-        if(flywheelStatus) vermithrax.setFlywheelPower(flywheelMultiplier);
-        else vermithrax.setFlywheelPower(0);
         vermithrax.setDrivePower(lPower * driveMultiplier, rPower * driveMultiplier);
-        vermithrax.setIntakeState(intakeStatus);
-        vermithrax.setLoaderState(loaderStatus);
+
+        if(flywheelStatus) vermithrax.setFlywheelPower(flywheelMultiplier);
+        else if(emergencyUnload) vermithrax.setFlywheelPower(-1);
+        else vermithrax.setFlywheelPower(0);
+
+        if(intakeStatus) vermithrax.setIntakePower(1);
+        else if(emergencyUnload) vermithrax.setIntakePower(-1);
+        else vermithrax.setIntakePower(0);
+
+        if(loaderStatus) vermithrax.setLoaderPower(1);
+        else if(emergencyUnload) vermithrax.setLoaderPower(-1);
+        else vermithrax.setLoaderPower(0);
     }
 
     public String getTelemetryStats() {

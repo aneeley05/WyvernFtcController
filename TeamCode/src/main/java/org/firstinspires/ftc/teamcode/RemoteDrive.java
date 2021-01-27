@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
     DRIVE LAYER
@@ -48,7 +47,8 @@ public class RemoteDrive extends OpMode {
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);
-            control.vermithrax.setIntakeState(false);
+            control.vermithrax.setIntakePower(0);
+            control.vermithrax.setLoaderPower(0);
             telemetry.addData("ControllerData", "FATAL RUNTIME ERROR");
             telemetry.addData("ERROR", e.getStackTrace());
         }

@@ -98,22 +98,12 @@ public class Vermithrax {
         motorFly2.setPower(flypower);
     }
 
-    public void setIntakeState(boolean state) {
-        if(state) {
-            motorIntake.setPower(1);
-        }
-        else {
-            motorIntake.setPower(0);
-        }
+    public void setIntakePower(double speed) {
+        motorIntake.setPower(speed);
     }
 
-    public void setLoaderState(boolean state) {
-        if(state) {
-            servoIntake.setPower(1);
-        }
-        else {
-            servoIntake.setPower(0);
-        }
+    public void setLoaderPower(double speed) {
+        servoIntake.setPower(speed);
     }
 }
 
