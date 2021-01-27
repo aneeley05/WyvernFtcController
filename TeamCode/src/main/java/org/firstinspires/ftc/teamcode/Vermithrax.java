@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -22,6 +23,7 @@ public class Vermithrax {
     public DcMotor motorFly2;
 
     public DcMotor motorIntake;
+    public CRServo servoIntake;
 
     public Vermithrax(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
@@ -42,21 +44,23 @@ public class Vermithrax {
 
         // Intake motors
         motorIntake = hwMap.get(DcMotor.class, "motorIntake");
+        servoIntake = hwMap.get(CRServo.class, "servoIntake");
 
         //  left motors (confirmed)
-        motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
-        motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorFL.setDirection(DcMotorSimple.Direction.REVERSE); // beep
+        motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //  right motors (confirmed)
-        motorFR.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorBR.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // flywheel motors (confirmed)
         motorFly1.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFly2.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Intake motors (uncomfirmed)
-        motorIntake.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorIntake.setDirection(DcMotorSimple.Direction.REVERSE);
+        servoIntake.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Set all power to 0 by default
         motorFL.setPower(0);
@@ -66,6 +70,7 @@ public class Vermithrax {
         motorFly1.setPower(0);
         motorFly2.setPower(0);
         motorIntake.setPower(0);
+        servoIntake.setPower(0);
 
         // Set encoder mode
         motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -94,8 +99,21 @@ public class Vermithrax {
     }
 
     public void setIntakeState(boolean state) {
-        if(state) motorIntake.setPower(1);
-        else motorIntake.setPower(0);
+        if(state) {
+            motorIntake.setPower(1);
+        }
+        else {
+            motorIntake.setPower(0);
+        }
+    }
+
+    public void setLoaderState(boolean state) {
+        if(state) {
+            servoIntake.setPower(1);
+        }
+        else {
+            servoIntake.setPower(0);
+        }
     }
 }
 

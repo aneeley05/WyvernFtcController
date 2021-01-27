@@ -14,6 +14,7 @@ public class Control {
     public double rPower = 0;
     public double flywheelSpeed = 1;
     public boolean intakeStatus;
+    public boolean loaderStatus;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp10pressed = false;
     public boolean flywheelUp50pressed = false;
@@ -22,22 +23,23 @@ public class Control {
     Vermithrax vermithrax;
 
     public void init(HardwareMap hwMap) {
-        // Create an instance of, and initialize the drive controller
+        // Create an instance of, and initialize the drive controller1
         vermithrax = new Vermithrax(hwMap);
         vermithrax.init();
     }
 
-    public void updateGamepad(Gamepad controller) {
+    public void updateGamepad(Gamepad controller1, Gamepad controller2) {
         // Controller mapping
-        lPower = -controller.left_stick_y;
-        rPower = -controller.right_stick_y;
+        lPower = -controller1.left_stick_y;
+        rPower = -controller1.right_stick_y;
 
-        boolean flywheelUp10 = controller.dpad_up;
-        boolean flywheelDown10 = controller.dpad_down;
-        boolean flywheelUp50 = controller.dpad_right;
-        boolean flywheelDown50 = controller.dpad_left;
+        boolean flywheelUp10 = controller1.dpad_up;
+        boolean flywheelDown10 = controller1.dpad_down;
+        boolean flywheelUp50 = controller1.dpad_right;
+        boolean flywheelDown50 = controller1.dpad_left;
 
-        intakeStatus = controller.right_trigger > 0.3;
+        intakeStatus = controller2.right_trigger > 0.3;
+        loaderStatus = controller2.right_bumper;
 
         // DPAD speed changes
 
@@ -67,22 +69,23 @@ public class Control {
 
         // Clipping stick values
         if(lPower > 1) lPower = 1;
-        if(lPower < 0) lPower = 0;
+        if(lPower < -1) lPower = -1;
         if(rPower > 1) rPower = 1;
-        if(rPower < 0) rPower = 0;
+        if(rPower < -1) rPower = -1;
 
         // Set hardware state
-        if(controller.left_trigger > 0.3) vermithrax.setFlywheelPower(flywheelSpeed);
+        if(controller2.left_trigger > 0.3) vermithrax.setFlywheelPower(flywheelSpeed);
         else vermithrax.setFlywheelPower(0);
         vermithrax.setDrivePower(lPower, rPower);
         vermithrax.setIntakeState(intakeStatus);
+        vermithrax.setLoaderState(loaderStatus);
     }
 
     public String getTelemetryStats() {
         return "FLYWHEEL: " + flywheelSpeed + " lDRIVE: " + lPower + " rDRIVE: " + rPower + " INTAKE: " + intakeStatus;
     }
 
-    public void driveForTime(double lPower, double rPower, long time) throws InterruptedException{
+    public void driveForTime(double lPower, double rPower, long time) throws InterruptedException {
         vermithrax.setDrivePower(lPower, rPower);
         Thread.sleep(time);
         vermithrax.setDrivePower(0, 0);

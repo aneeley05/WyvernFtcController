@@ -40,7 +40,7 @@ public class RemoteDrive extends OpMode {
     @Override
     public void loop() {
         try {
-            control.updateGamepad(gamepad1);
+            control.updateGamepad(gamepad1, gamepad2);
             telemetry.addData("Status", "RUNNING");
             telemetry.addData("ControllerData", control.getTelemetryStats());
         } catch (Exception e) {
