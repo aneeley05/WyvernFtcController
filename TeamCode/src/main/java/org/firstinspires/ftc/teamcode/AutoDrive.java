@@ -20,10 +20,16 @@ public class AutoDrive extends LinearOpMode {
         control = new Control();
         control.init(hardwareMap);
         // Await start event
+        control.vermithrax.toggleGripState();
         waitForStart();
         // Main game logic
         try {
-            control.driveForTime(0.5, 0.5, 1000);
+            control.driveForTime(0.85, 0.7, 1300);
+            control.vermithrax.toggleArmLift();
+            sleep(2000);
+            control.vermithrax.toggleGripState();
+            sleep(100);
+            control.vermithrax.toggleArmLift();
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);

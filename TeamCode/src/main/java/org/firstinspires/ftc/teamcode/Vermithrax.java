@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /*
     HARDWARE LAYER
@@ -24,6 +25,12 @@ public class Vermithrax {
 
     public DcMotor motorIntake;
     public CRServo servoIntake;
+
+    public DcMotor motorArm;
+    public Servo servoArm;
+
+    public boolean armAlreadyUp = true;
+    public boolean armClampOpen = true;
 
     public Vermithrax(HardwareMap hardwareMap) {
         this.hwMap = hardwareMap;
@@ -46,6 +53,10 @@ public class Vermithrax {
         motorIntake = hwMap.get(DcMotor.class, "motorIntake");
         servoIntake = hwMap.get(CRServo.class, "servoIntake");
 
+        // Arm motors
+        motorArm = hwMap.get(DcMotor.class, "motorArm");
+        servoArm = hwMap.get(Servo.class, "servoArm");
+
         //  left motors (confirmed)
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE); // beep
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -57,6 +68,9 @@ public class Vermithrax {
         // flywheel motors (confirmed)
         motorFly1.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFly2.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        // arm motors (unconfirmed)
+        motorArm.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Intake motors (uncomfirmed)
         motorIntake.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -71,6 +85,7 @@ public class Vermithrax {
         motorFly2.setPower(0);
         motorIntake.setPower(0);
         servoIntake.setPower(0);
+        motorArm.setPower(0);
 
         // Set encoder mode
         motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -80,6 +95,7 @@ public class Vermithrax {
         motorFly1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorFly2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     // A simple drive function to set the power of both motor arrays at the same time
@@ -104,6 +120,31 @@ public class Vermithrax {
 
     public void setLoaderPower(double speed) {
         servoIntake.setPower(speed);
+    }
+
+    public void toggleGripState() {
+        if(!armClampOpen) {
+            servoArm.setPosition(0);
+            armClampOpen = true;
+        }
+        else {
+            servoArm.setPosition(0.55);
+            armClampOpen = false;
+        }
+    }
+
+    public void toggleArmLift() throws InterruptedException {
+        if(!armAlreadyUp) {
+            motorArm.setPower(-1);
+            Thread.sleep(1000);
+            motorArm.setPower(0);
+            armAlreadyUp = true;
+        } else {
+            motorArm.setPower(1);
+            Thread.sleep(1000);
+            motorArm.setPower(0);
+            armAlreadyUp = false;
+        }
     }
 }
 

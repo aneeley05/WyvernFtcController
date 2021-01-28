@@ -25,6 +25,8 @@ public class Control {
     public boolean driveUp50pressed = false;
     public boolean driveDown50pressed = false;
     public boolean driveDown10pressed = false;
+    public boolean aPressed = false;
+    public boolean bPressed = false;
 
     Vermithrax vermithrax;
 
@@ -34,10 +36,10 @@ public class Control {
         vermithrax.init();
     }
 
-    public void updateGamepad(Gamepad controller1, Gamepad controller2) {
+    public void updateGamepad(Gamepad controller1, Gamepad controller2) throws InterruptedException {
         // Controller mapping
-        lPower = -controller1.left_stick_y;
-        rPower = -controller1.right_stick_y;
+        lPower = -controller1.right_stick_y;
+        rPower = -controller1.left_stick_y;
 
         boolean flywheelUp10 = controller2.dpad_up;
         boolean flywheelDown10 = controller2.dpad_down;
@@ -51,6 +53,10 @@ public class Control {
         intakeStatus = controller2.left_trigger > 0.3;
         loaderStatus = controller2.right_trigger > 0.3;
         flywheelStatus = controller2.left_bumper;
+        if(controller2.a && !aPressed) vermithrax.toggleArmLift();
+        if(controller2.b && !bPressed) vermithrax.toggleGripState();
+        aPressed = controller2.a;
+        bPressed = controller2.b;
         boolean emergencyUnload = controller2.x;
 
         // DPAD speed changes
