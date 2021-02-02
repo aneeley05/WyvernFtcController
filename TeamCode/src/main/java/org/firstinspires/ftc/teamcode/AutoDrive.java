@@ -24,7 +24,7 @@ public class AutoDrive extends LinearOpMode {
         waitForStart();
         // Main game logic
         try {
-            control.driveForTime(0.85, 0.7, 1300);
+            control.driveForTime(0.85, 0.7, 1500);
             control.vermithrax.toggleArmLift();
             sleep(2000);
             control.vermithrax.toggleGripState();
