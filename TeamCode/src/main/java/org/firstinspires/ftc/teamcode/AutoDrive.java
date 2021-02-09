@@ -24,7 +24,7 @@ public class AutoDrive extends LinearOpMode {
         waitForStart();
         // Main game logic
         try {
-            control.driveForTime(0.4, 0.5, 3000);
+            control.driveForTime(0.4, 3000);
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);

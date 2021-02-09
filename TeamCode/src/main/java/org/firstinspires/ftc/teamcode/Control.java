@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -155,6 +156,30 @@ public class Control {
     }
 
     public void driveForTime(double power, long time) throws InterruptedException {
+        long startTime = System.currentTimeMillis();
+        long targetStop = System.currentTimeMillis() + time;
+
+        double currentLeftPower = power;
+        double currentRightPower = power;
+
+        double varianceTolerance = 1;
+
+        double correctionIntensity = 0.01;
+
+        double setPointAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360);
+
+        while(startTime < targetStop) {
+            double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360);
+            if(currentAngle < setPointAngle - varianceTolerance) {
+                currentRightPower += correctionIntensity;
+                currentLeftPower -= correctionIntensity;
+            } else if(currentAngle > setPointAngle + varianceTolerance) {
+                currentRightPower -= correctionIntensity;
+                currentLeftPower += correctionIntensity;
+            }
+            vermithrax.setDrivePower(currentLeftPower, currentRightPower);
+
+        }
         vermithrax.setDrivePower(power, power);
         Thread.sleep(time);
         vermithrax.setDrivePower(0, 0);
