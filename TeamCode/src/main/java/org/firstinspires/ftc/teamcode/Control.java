@@ -15,8 +15,12 @@ public class Control {
     public double flywheelMultiplier = 1;
     public double driveMultiplier = 1;
     public boolean intakeStatus;
+    public boolean intakeButton;
+    public boolean intakeButtonReleased = true;
     public boolean loaderStatus;
     public boolean flywheelStatus;
+    public boolean flywheelButton;
+    public boolean flywheelButtonReleased = true;
     public boolean flywheelDown10pressed = false;
     public boolean flywheelUp10pressed = false;
     public boolean flywheelUp50pressed = false;
@@ -50,9 +54,27 @@ public class Control {
         boolean driveUp50 = controller1.dpad_right;
         boolean driveDown50 = controller1.dpad_left;
 
-        intakeStatus = controller2.left_trigger > 0.3;
+        intakeButton = controller2.left_trigger > 0.3;
         loaderStatus = controller2.right_trigger > 0.3;
-        flywheelStatus = controller2.left_bumper;
+        flywheelButton = controller2.left_bumper;
+
+        if(intakeButton && !intakeStatus && intakeButtonReleased) {
+            intakeStatus = true;
+            intakeButtonReleased = false;
+        } if(intakeButton && intakeStatus && intakeButtonReleased) {
+            intakeStatus = false;
+            intakeButtonReleased = false;
+        } if(!intakeButton) intakeButtonReleased = true;
+
+
+        if(flywheelButton && !flywheelStatus && flywheelButtonReleased) {
+            flywheelStatus = true;
+            flywheelButtonReleased = false;
+        } if(flywheelButton && flywheelStatus && flywheelButtonReleased) {
+            flywheelStatus = false;
+            flywheelButtonReleased = false;
+        } if(!flywheelButton) flywheelButtonReleased = true;
+
         if(controller2.a && !aPressed) vermithrax.toggleArmLift();
         if(controller2.b && !bPressed) vermithrax.toggleGripState();
         aPressed = controller2.a;
