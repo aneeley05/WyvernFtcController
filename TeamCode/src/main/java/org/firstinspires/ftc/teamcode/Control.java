@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 /*
     CONTROL LAYER
 
@@ -149,11 +151,11 @@ public class Control {
     }
 
     public String getTelemetryStats() {
-        return "FLYWHEEL MULTIPLIER: " + flywheelMultiplier + " DRIVE MULTIPLIER: " + driveMultiplier;
+        return "ANGLE: " + ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + " FLYWHEEL MULTIPLIER: " + flywheelMultiplier + " DRIVE MULTIPLIER: " + driveMultiplier;
     }
 
-    public void driveForTime(double lPower, double rPower, long time) throws InterruptedException {
-        vermithrax.setDrivePower(lPower, rPower);
+    public void driveForTime(double power, long time) throws InterruptedException {
+        vermithrax.setDrivePower(power, power);
         Thread.sleep(time);
         vermithrax.setDrivePower(0, 0);
     }
