@@ -156,7 +156,6 @@ public class Control {
     }
 
     public void driveForTime(double power, long time) throws InterruptedException {
-        long startTime = System.currentTimeMillis();
         long targetStop = System.currentTimeMillis() + time;
 
         double currentLeftPower = power;
@@ -168,7 +167,7 @@ public class Control {
 
         double setPointAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360);
 
-        while(startTime < targetStop) {
+        while(System.currentTimeMillis() < targetStop) {
             double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360);
             if(currentAngle < setPointAngle - varianceTolerance) {
                 currentRightPower += correctionIntensity;
@@ -178,7 +177,7 @@ public class Control {
                 currentLeftPower += correctionIntensity;
             }
             vermithrax.setDrivePower(currentLeftPower, currentRightPower);
-
+            Thread.sleep(10);
         }
         vermithrax.setDrivePower(power, power);
         Thread.sleep(time);
