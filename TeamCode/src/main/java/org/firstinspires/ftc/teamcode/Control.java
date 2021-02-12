@@ -161,26 +161,25 @@ public class Control {
         double currentLeftPower = power;
         double currentRightPower = power;
 
-        double varianceTolerance = 1;
+        double varianceTolerance = 3;
 
         double correctionIntensity = 0.01;
 
-        double setPointAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360);
+        double setPointAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
 
         while(System.currentTimeMillis() < targetStop) {
-            double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360);
-            if(currentAngle < setPointAngle - varianceTolerance) {
+
+            double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
+            if(currentAngle < (setPointAngle - varianceTolerance)) {
                 currentRightPower += correctionIntensity;
                 currentLeftPower -= correctionIntensity;
-            } else if(currentAngle > setPointAngle + varianceTolerance) {
+            } else if(currentAngle > (setPointAngle + varianceTolerance)) {
                 currentRightPower -= correctionIntensity;
                 currentLeftPower += correctionIntensity;
             }
-            vermithrax.setDrivePower(currentLeftPower, currentRightPower);
+            vermithrax.setDrivePower(currentRightPower, currentLeftPower);
             Thread.sleep(10);
         }
-        vermithrax.setDrivePower(power, power);
-        Thread.sleep(time);
         vermithrax.setDrivePower(0, 0);
     }
 }
