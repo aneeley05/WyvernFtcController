@@ -24,7 +24,10 @@ public class AutoDrive extends LinearOpMode {
         waitForStart();
         // Main game logic
         try {
-            control.driveForTime(0.4, 3000);
+            //control.driveForTime(0.4, 3000);
+            control.vermithrax.toggleArmLift();
+            Thread.sleep(3000);
+            control.vermithrax.toggleArmLift();
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);
@@ -32,6 +35,10 @@ public class AutoDrive extends LinearOpMode {
             control.vermithrax.setLoaderPower(0);
             telemetry.addData("Status", "FATAL RUNTIME ERROR");
             telemetry.addData("ERROR", e.getStackTrace());
+        }
+        while(opModeIsActive()) {
+            telemetry.addData("position", control.vermithrax.motorArm.getCurrentPosition());
+            telemetry.update();
         }
     }
 

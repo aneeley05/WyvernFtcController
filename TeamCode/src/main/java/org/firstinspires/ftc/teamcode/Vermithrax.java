@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -31,7 +32,7 @@ public class Vermithrax {
     public DcMotor motorIntake;
     public CRServo servoIntake;
 
-    public DcMotor motorArm;
+    public DcMotorEx motorArm;
     public Servo servoArm;
 
     public boolean armAlreadyUp = true;
@@ -59,7 +60,7 @@ public class Vermithrax {
         servoIntake = hwMap.get(CRServo.class, "servoIntake");
 
         // Arm motors
-        motorArm = hwMap.get(DcMotor.class, "motorArm");
+        motorArm = hwMap.get(DcMotorEx.class, "motorArm");
         servoArm = hwMap.get(Servo.class, "servoArm");
 
         //  left motors (confirmed)
@@ -97,6 +98,7 @@ public class Vermithrax {
         motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -104,7 +106,6 @@ public class Vermithrax {
         motorFly1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorFly2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -159,17 +160,20 @@ public class Vermithrax {
     }
 
     public void toggleArmLift() throws InterruptedException {
-        if(!armAlreadyUp) {
-            motorArm.setPower(-1);
-            Thread.sleep(1000);
-            motorArm.setPower(0);
-            armAlreadyUp = true;
-        } else {
-            motorArm.setPower(1);
-            Thread.sleep(1000);
-            motorArm.setPower(0);
+        if(armAlreadyUp) {
+            setArmPosition(-2600);
             armAlreadyUp = false;
+        } else {
+            setArmPosition(2600);
+            armAlreadyUp = true;
         }
+    }
+
+    public void setArmPosition(int ticks) {
+        motorArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorArm.setTargetPosition(ticks);
+        motorArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorArm.setVelocity(1200);
     }
 }
 
