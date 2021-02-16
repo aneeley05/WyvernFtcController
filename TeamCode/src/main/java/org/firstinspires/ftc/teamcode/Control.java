@@ -170,6 +170,7 @@ public class Control {
         while(System.currentTimeMillis() < targetStop) {
 
             double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
+            // Might be backwards
             if(currentAngle < (setPointAngle - varianceTolerance)) {
                 currentRightPower += correctionIntensity;
                 currentLeftPower -= correctionIntensity;

@@ -148,29 +148,33 @@ public class Vermithrax {
         servoIntake.setPower(speed);
     }
 
-    public void toggleGripState() {
+    public void toggleGripState() throws InterruptedException {
         if(!armClampOpen) {
             servoArm.setPosition(0);
+            //Thread.sleep(550);
             armClampOpen = true;
         }
         else {
-            servoArm.setPosition(0.55);
+            servoArm.setPosition(0.40);
+            //Thread.sleep(550);
             armClampOpen = false;
         }
     }
 
     public void toggleArmLift() throws InterruptedException {
         if(armAlreadyUp) {
-            setArmPosition(-2600);
+            setArmPosition(-2800);
+            //Thread.sleep(3000);
             armAlreadyUp = false;
         } else {
-            setArmPosition(2600);
+            setArmPosition(0);
+            //Thread.sleep(3000);
             armAlreadyUp = true;
         }
     }
 
     public void setArmPosition(int ticks) {
-        motorArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motorArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorArm.setTargetPosition(ticks);
         motorArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorArm.setVelocity(1200);
