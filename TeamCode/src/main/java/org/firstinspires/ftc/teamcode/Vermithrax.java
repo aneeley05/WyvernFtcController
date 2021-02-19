@@ -163,7 +163,7 @@ public class Vermithrax {
 
     public void toggleArmLift() throws InterruptedException {
         if(armAlreadyUp) {
-            setArmPosition(-2800);
+            setArmPosition(-1700);
             //Thread.sleep(3000);
             armAlreadyUp = false;
         } else {

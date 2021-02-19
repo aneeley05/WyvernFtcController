@@ -172,11 +172,11 @@ public class Control {
             double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
             // Might be backwards
             if(currentAngle < (setPointAngle - varianceTolerance)) {
-                currentRightPower += correctionIntensity;
-                currentLeftPower -= correctionIntensity;
-            } else if(currentAngle > (setPointAngle + varianceTolerance)) {
-                currentRightPower -= correctionIntensity;
                 currentLeftPower += correctionIntensity;
+                currentRightPower -= correctionIntensity;
+            } else if(currentAngle > (setPointAngle + varianceTolerance)) {
+                currentLeftPower -= correctionIntensity;
+                currentRightPower += correctionIntensity;
             }
             vermithrax.setDrivePower(currentRightPower, currentLeftPower);
             Thread.sleep(10);
