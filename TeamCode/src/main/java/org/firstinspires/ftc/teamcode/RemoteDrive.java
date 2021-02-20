@@ -33,6 +33,7 @@ public class RemoteDrive extends OpMode {
     @Override
     public void start() {
         telemetry.addData("Status", "Starting...");
+        control.vermithrax.initArm();
     }
 
     /*

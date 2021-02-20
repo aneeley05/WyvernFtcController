@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  Contains all logical game operations and utilizes the control layer for robot functions
 */
 
-@Autonomous(name="Vermithrax_AutoDrive", group="Autonomous")
-public class AutoDrive extends LinearOpMode {
+@Autonomous(name="Vermithrax_AutoDriveAdvanced", group="Autonomous")
+public class AutoDriveAdvanced extends LinearOpMode {
 
     public Control control;
 
@@ -23,17 +23,27 @@ public class AutoDrive extends LinearOpMode {
         control.vermithrax.toggleGripState();
         waitForStart();
         // Main game logic
-        control.vermithrax.initArm();
+        //control.vermithrax.initArm();
         try {
-            control.driveForTime(0.75, 0.75, 1350);
-            Thread.sleep(1500);
-            control.driveForTime(0.2, -0.2, 750);
-            Thread.sleep(500);
+            control.driveForTime(0.75, 0.75, 900);
+            Thread.sleep(1000);
+            control.vermithrax.setFlywheelPower(1);
+            Thread.sleep(3000);
+            control.vermithrax.setLoaderPower(1);
+            Thread.sleep(5000);
+            control.vermithrax.setFlywheelPower(0);
+            control.vermithrax.setLoaderPower(0);
+            control.driveForTime(0.75, 0.75, 750);
+            control.vermithrax.initArm();
+            Thread.sleep(1000);
+            control.driveForTime(-0.2, 0.2, 500);
+            Thread.sleep(1000);
             control.vermithrax.toggleArmLift();
             Thread.sleep(1000);
             control.vermithrax.toggleGripState();
-            Thread.sleep(500);
+            Thread.sleep(1000);
             control.vermithrax.toggleArmLift();
+            Thread.sleep(1000);
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);

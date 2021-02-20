@@ -155,32 +155,35 @@ public class Control {
         return "ANGLE: " + ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + " FLYWHEEL MULTIPLIER: " + flywheelMultiplier + " DRIVE MULTIPLIER: " + driveMultiplier;
     }
 
-    public void driveForTime(double power, long time) throws InterruptedException {
+    public void driveForTime(double lPower, double rPower, long time) throws InterruptedException {
         long targetStop = System.currentTimeMillis() + time;
 
-        double currentLeftPower = power;
-        double currentRightPower = power;
+//        double currentLeftPower = power;
+//        double currentRightPower = power;
+//
+//        double varianceTolerance = 5;
+//
+//        double correctionIntensity = 0.005;
+//
+//        double setPointAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
 
-        double varianceTolerance = 3;
+        while (System.currentTimeMillis() < targetStop) {
+            vermithrax.setDrivePower(lPower, rPower);
 
-        double correctionIntensity = 0.01;
-
-        double setPointAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
-
-        while(System.currentTimeMillis() < targetStop) {
-
-            double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
-            // Might be backwards
-            if(currentAngle < (setPointAngle - varianceTolerance)) {
-                currentLeftPower += correctionIntensity;
-                currentRightPower -= correctionIntensity;
-            } else if(currentAngle > (setPointAngle + varianceTolerance)) {
-                currentLeftPower -= correctionIntensity;
-                currentRightPower += correctionIntensity;
-            }
-            vermithrax.setDrivePower(currentRightPower, currentLeftPower);
-            Thread.sleep(10);
+//            double currentAngle = ((vermithrax.imu.getAngularOrientation().toAngleUnit(AngleUnit.DEGREES).firstAngle + 360) % 360) + 90;
+//            // Might be backwards
+//            if(currentAngle < (setPointAngle - varianceTolerance)) {
+//                currentLeftPower -= correctionIntensity;
+//                currentRightPower += correctionIntensity;
+//            } else if(currentAngle > (setPointAngle + varianceTolerance)) {
+//                currentLeftPower += correctionIntensity;
+//                currentRightPower -= correctionIntensity;
+//            }
+//            vermithrax.setDrivePower(currentRightPower, currentLeftPower);
+//            Thread.sleep(1);
         }
         vermithrax.setDrivePower(0, 0);
+
+
     }
 }
