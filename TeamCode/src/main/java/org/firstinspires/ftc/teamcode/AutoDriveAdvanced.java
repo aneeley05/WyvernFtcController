@@ -21,6 +21,7 @@ public class AutoDriveAdvanced extends LinearOpMode {
         control.init(hardwareMap);
         // Await start event
         control.vermithrax.toggleGripState();
+        control.vermithrax.setArmPosition(0);
         waitForStart();
         // Main game logic
         //control.vermithrax.initArm();
@@ -30,19 +31,29 @@ public class AutoDriveAdvanced extends LinearOpMode {
             control.vermithrax.setFlywheelPower(1);
             Thread.sleep(3000);
             control.vermithrax.setLoaderPower(1);
-            Thread.sleep(5000);
-            control.vermithrax.setFlywheelPower(0);
+            Thread.sleep(3000);
             control.vermithrax.setLoaderPower(0);
-            control.driveForTime(0.75, 0.75, 750);
+            control.vermithrax.setIntakePower(1);
+            Thread.sleep(2000);
+            control.vermithrax.setIntakePower(0);
+            control.vermithrax.setLoaderPower(1);
+            Thread.sleep(3000);
+            control.vermithrax.setIntakePower(0);
+            control.vermithrax.setLoaderPower(0);
+            control.vermithrax.setFlywheelPower(0);
+            control.driveForTime(0.75, 0.8, 750);
             control.vermithrax.initArm();
             Thread.sleep(1000);
-            control.driveForTime(-0.2, 0.2, 500);
+            control.driveForTime(-0.2, 0.4, 500);
             Thread.sleep(1000);
             control.vermithrax.toggleArmLift();
             Thread.sleep(1000);
             control.vermithrax.toggleGripState();
             Thread.sleep(1000);
             control.vermithrax.toggleArmLift();
+            control.driveForTime(0.2, -0.4, 500);
+            Thread.sleep(1000);
+            control.vermithrax.setArmPosition(0);
             Thread.sleep(1000);
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
