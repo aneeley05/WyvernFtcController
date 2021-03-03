@@ -17,7 +17,7 @@ import java.util.List;
  Contains all logical game operations and utilizes the control layer for robot functions
 */
 
-@Autonomous(name="Vermithrax_AutoDriveObjectDetect", group="Autonomous")
+@Autonomous(name="Vermithrax_AutoDriveObjectDetect", group="Autonomous")//
 public class AutoDriveAdvancedObjectDetection extends LinearOpMode {
 
     public Control control;
