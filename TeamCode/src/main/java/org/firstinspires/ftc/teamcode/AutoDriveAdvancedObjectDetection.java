@@ -64,7 +64,7 @@ public class AutoDriveAdvancedObjectDetection extends LinearOpMode {
         int singlesFound = 0;
         int noneFound = 0;
         telemetry.addData(">", "Starting Recognition Loop");
-        while(opModeIsActive() && loopIter < 21) {
+        while(opModeIsActive() && loopIter < 23) {
             if (tfod != null) {
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
