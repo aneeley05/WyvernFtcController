@@ -85,45 +85,62 @@ public class AutoDriveAdvancedObjectDetection extends LinearOpMode {
             loopIter += 1;
         }
 
+        int dropoffSquare = 2;
+
         if(quadsFound > singlesFound && quadsFound > noneFound) {
+            dropoffSquare = 3;
             telemetry.addData(">", "Found a likely result of QUAD over 21 iterations");
         } else if(singlesFound > quadsFound && singlesFound > noneFound) {
+            dropoffSquare = 2;
             telemetry.addData(">", "Found a likely result of SINGLE over 21 iterations");
         } else {
+            dropoffSquare = 1;
             telemetry.addData(">", "Found a likely result of NO RINGS over 21 iterations");
         }
 
         // Main game logic
         //control.vermithrax.initArm();
         try {
+            // Drive forward to prep shot
             control.driveForTime(0.75, 0.75, 900);
             Thread.sleep(1000);
+            // Spin up flywheel and then loader
             control.vermithrax.setFlywheelPower(1);
             Thread.sleep(3000);
             control.vermithrax.setLoaderPower(1);
             Thread.sleep(3000);
+            // Turn off loader and turn on intake for second ring
             control.vermithrax.setLoaderPower(0);
             control.vermithrax.setIntakePower(1);
             Thread.sleep(2000);
+            // Turn off intake and turn on loader to fire second ring
             control.vermithrax.setIntakePower(0);
             control.vermithrax.setLoaderPower(1);
             Thread.sleep(3000);
+            // Turn everything off
             control.vermithrax.setIntakePower(0);
             control.vermithrax.setLoaderPower(0);
             control.vermithrax.setFlywheelPower(0);
-            control.driveForTime(0.75, 0.8, 750);
-            control.vermithrax.initArm();
+            // Drive to the appropriate drop zone
+            if(dropoffSquare == 1) {
+                // MAKE THIS
+            } else if(dropoffSquare == 2) {
+                control.driveForTime(0.75, 0.8, 750);
+                control.vermithrax.initArm();
+                Thread.sleep(1000);
+                control.driveForTime(-0.2, 0.4, 500); // Rotate to face drop zone
+            } else if(dropoffSquare == 3) {
+                // MAKE THIS
+            }
             Thread.sleep(1000);
-            control.driveForTime(-0.2, 0.4, 500);
+            control.vermithrax.toggleArmLift(); // Drop arm
             Thread.sleep(1000);
-            control.vermithrax.toggleArmLift();
+            control.vermithrax.toggleGripState(); // Let go of wobble
             Thread.sleep(1000);
-            control.vermithrax.toggleGripState();
+            control.vermithrax.toggleArmLift(); // Move arm back up
+            control.driveForTime(0.2, -0.4, 500); // Rotate back to line
             Thread.sleep(1000);
-            control.vermithrax.toggleArmLift();
-            control.driveForTime(0.2, -0.4, 500);
-            Thread.sleep(1000);
-            control.vermithrax.setArmPosition(0);
+            control.vermithrax.setArmPosition(0); // De-init arm
             Thread.sleep(1000);
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
