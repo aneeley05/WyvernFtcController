@@ -156,6 +156,10 @@ public class AutoDriveAdvancedObjectDetection extends LinearOpMode {
             Thread.sleep(1000);
             control.vermithrax.setArmPosition(0); // De-init arm
             Thread.sleep(1000);
+            if(dropoffSquare == 3) {
+                control.driveForTime(-0.6, -0.6, 800);
+                Thread.sleep(1000);
+            }
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);
