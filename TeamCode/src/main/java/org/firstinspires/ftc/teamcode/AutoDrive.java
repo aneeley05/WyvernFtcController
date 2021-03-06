@@ -25,15 +25,22 @@ public class AutoDrive extends LinearOpMode {
         // Main game logic
         control.vermithrax.initArm();
         try {
-            control.driveForTime(0.75, 0.75, 1350);
-            Thread.sleep(1500);
-            control.driveForTime(0.2, -0.2, 750);
-            Thread.sleep(500);
+            control.driveForTime(0.75, 0.8, 750);
+            control.vermithrax.initArm();
+            Thread.sleep(1000);
+            control.driveForTime(-0.2, 0.4, 1000);
+            Thread.sleep(1000);
+            control.driveForTime(0.75, 0.8, 250);
+            Thread.sleep(1000);
             control.vermithrax.toggleArmLift();
             Thread.sleep(1000);
             control.vermithrax.toggleGripState();
-            Thread.sleep(500);
+            Thread.sleep(1000);
             control.vermithrax.toggleArmLift();
+            control.driveForTime(0.2, -0.4, 500);
+            Thread.sleep(1000);
+            control.vermithrax.setArmPosition(0);
+            Thread.sleep(1000);
         } catch (Exception e) {
             control.vermithrax.setFlywheelPower(0);
             control.vermithrax.setDrivePower(0, 0);

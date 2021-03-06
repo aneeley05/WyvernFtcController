@@ -34,6 +34,22 @@ public class AutoDriveAdvanced extends LinearOpMode {
             Thread.sleep(3000);
             control.vermithrax.setLoaderPower(0);
             control.vermithrax.setIntakePower(1);
+            control.driveForTime(0.75, 0.8, 750);
+            control.vermithrax.initArm();
+            Thread.sleep(1000);
+            control.driveForTime(-0.2, 0.4, 1000);
+            Thread.sleep(1000);
+            control.driveForTime(0.75, 0.8, 250);
+            Thread.sleep(1000);
+            control.vermithrax.toggleArmLift();
+            Thread.sleep(1000);
+            control.vermithrax.toggleGripState();
+            Thread.sleep(1000);
+            control.vermithrax.toggleArmLift();
+            control.driveForTime(0.2, -0.4, 500);
+            Thread.sleep(1000);
+            control.vermithrax.setArmPosition(0);
+            Thread.sleep(1000);
             Thread.sleep(2000);
             control.vermithrax.setIntakePower(0);
             control.vermithrax.setLoaderPower(1);
@@ -91,4 +107,5 @@ public class AutoDriveAdvanced extends LinearOpMode {
 //            telemetry.addData("ERROR", e.getStackTrace());
 //        }
 //    }
+
 }
