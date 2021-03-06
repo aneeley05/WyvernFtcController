@@ -135,16 +135,10 @@ public class AutoDriveAdvancedObjectDetection extends LinearOpMode {
                 control.driveForTime(-0.2, 0.4, 500);
                 // Rotate to face drop zone
             } else if(dropoffSquare == 3) {
-                control.driveForTime(0.75, 0.8, 750);
-                control.vermithrax.initArm();
-                Thread.sleep(1000);
-                control.driveForTime(-0.2, 0.4, 500);
                 control.driveForTime(0.6, 0.8, 1200);
                 control.vermithrax.initArm();
                 Thread.sleep(1000);
                 control.driveForTime(-0.2, 0.4, 500); // Rotate to face drop zone
-                control.driveForTime(-0.6, -0.6, 900); // Back up to line
-                Thread.sleep(1000);
             }
             Thread.sleep(1000);
             control.vermithrax.toggleArmLift(); // Drop arm
